@@ -31,3 +31,10 @@ The library uses JS `number` (64-bit float) as the backing integer type, which c
 - **Division by zero saturates**, it does not throw. Positive numerator over zero yields `MAX_RAW`; negative yields `MIN_RAW`; `0/0` yields `0`. This matches common fixed-point DSP conventions and keeps the type closed under division. If you need an error, check the denominator first.
 - **Scale mismatch throws.** `add`, `sub`, `mul`, `div`, and `eq` all require matching `fractionalBits`. There is no implicit rescaling; rescaling loses precision and we will not guess whether you wanted that.
 - **`fromReal` rounds half away from zero**, so `fromReal(-0.5, 0)` is `-1`, not `0`. JS `Math.round` rounds half-up towards `+Infinity`, which is asymmetric; we correct for it.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+

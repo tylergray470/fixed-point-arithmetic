@@ -1,6 +1,6 @@
 {
   "name": "fixed-point-arithmetic",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Performs saturating add, subtract, multiply, and divide on fixed-point numbers represented as scaled integers.",
   "type": "module",
   "main": "src/index.js",
